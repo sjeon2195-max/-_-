@@ -154,13 +154,12 @@ function keyPressed() {
 async function generateContent() {
   receiving = true;
 
-  const url =
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent";
+  // 수정된 부분: URL 뒤에 ?key=apiKey 를 붙입니다.
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
   fetch(url, {
     method: "POST",
     headers: {
-      "x-goog-api-key": apiKey,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -170,6 +169,7 @@ async function generateContent() {
       contents: chats,
     }),
   })
+  // ... 나머지 코드는 동일
     .then(async response => {
       if (!response.ok) {
         const errorText = await response.text();
